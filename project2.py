@@ -52,5 +52,18 @@ def ip(a):
 def getting_Ip(hostname):
     ip=socket.gethostbyname(hostname)
     print("IP Address is: %s " %ip )
-connecttotv('www.github.com')
+class tv(device):
+    def tv(self):
+        tvip=input("plese insert your hostname : ")
+        ip=socket.gethostbyname(tvip)
+        s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+        port=80
+        s.connect((ip,port))
+        print(f'Socket has successfully connected on port =={ip}')
+
+smarttv=tv("140.82.121.3","30-65-EC-6F-C4-58","narges")
+print(smarttv.tv())
+
+
+
 
