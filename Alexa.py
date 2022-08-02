@@ -1,10 +1,15 @@
 
+from ast import Await
+from http import client
 import speech_recognition as sr
 import pyttsx3
 import pyaudio
 import pywhatkit as kit
 import datetime
 import wikipedia
+import python_weather
+import asyncio
+
 
 listener=sr.Recognizer()
 engine=pyttsx3.init()
@@ -37,7 +42,9 @@ def user_commands():
         return command
         
         pass
+
     
+
    
 
 def run_alexa():
@@ -48,19 +55,21 @@ def run_alexa():
         #print(new_command)
         engin_talk('playing'+ song)
         kit.playonyt(song)  
-    if 'time' in new_command:
+    elif 'time' in new_command:
         time=datetime.datetime.now().strftime('%I:%M:%P')
         engin_talk('the time is:' + time)
-    if 'who is' in new_command:
+    elif 'who is' in new_command:
         name=new_command.replace('who is', '')
         info=wikipedia.summary(name)    
         print(info)
         engin_talk(info)
+    
     else:
         engin_talk('I could not hear properly! ')
     
 
-run_alexa()
+#run_alexa()
+
 
     
     
