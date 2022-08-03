@@ -10,7 +10,6 @@ import wikipedia
 import python_weather
 import asyncio
 
-
 listener=sr.Recognizer()
 engine=pyttsx3.init()
 volume=engine.getProperty('volume')
@@ -42,10 +41,30 @@ def user_commands():
         return command
         
         pass
-
+def gettingorder():
     
 
-   
+        with sr.Microphone() as source:
+            engin_talk('Can I have your Number? ')
+            print("Can I have your number!!")
+            voice=listener.listen(source)
+            number=listener.recognize_google(voice)
+            print('your number is :{}'.format(number))
+        return number
+    
+    
+def gettingmsg():
+    try:
+        with sr.Microphone() as source:
+            engin_talk('May I have your message? ')
+            voice=listener.listen(source)
+            msg=listener.recognize_google(voice)
+            
+            print('your message is :{}'.format(msg))
+        return msg
+    except :
+        print("error")
+    
 
 def run_alexa():
     command=user_commands()
@@ -63,12 +82,21 @@ def run_alexa():
         info=wikipedia.summary(name)    
         print(info)
         engin_talk(info)
-    
+    elif 'message' in new_command:
+        number=gettingorder()
+        message=gettingmsg()
+        try:
+            kit.sendwhatmsg('+1'+'number',message='message',time_hour=13,time_min=15,wait_time=10)
+            engin_talk("Message is sent")
+        except:
+            print("Error in sending message")
     else:
         engin_talk('I could not hear properly! ')
     
 
 #run_alexa()
+#gettingorder()
+#gettingmsg()
 
 
     
