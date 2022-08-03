@@ -28,7 +28,8 @@ def user_commands():
     
     try:
         with sr.Microphone() as source:
-            print("start speaking please!!")
+            engin_talk('My name is Alexa, What can I do for you')
+            engin_talk("start speaking please!!")
             voice=listener.listen(source)
             command=listener.recognize_google(voice)
             command=command.lower()
@@ -45,7 +46,7 @@ def gettingorder():
     
 
         with sr.Microphone() as source:
-            engin_talk('Can I have your Number? ')
+            engin_talk('I am ready to send a message, Can I have your Number? ')
             print("Can I have your number!!")
             voice=listener.listen(source)
             number=listener.recognize_google(voice)
@@ -69,6 +70,7 @@ def gettingmsg():
 def run_alexa():
     command=user_commands()
     new_command=str(command)
+    
     if 'play' in new_command:
         song=new_command.replace("play"," ")
         #print(new_command)
@@ -94,7 +96,7 @@ def run_alexa():
         engin_talk('I could not hear properly! ')
     
 
-#run_alexa()
+run_alexa()
 #gettingorder()
 #gettingmsg()
 
