@@ -1,5 +1,6 @@
 
 from ast import Await
+from fnmatch import translate
 from http import client
 import speech_recognition as sr
 import pyttsx3
@@ -9,6 +10,8 @@ import datetime
 import wikipedia
 import python_weather
 import asyncio
+import googletrans
+import time
 
 listener=sr.Recognizer()
 engine=pyttsx3.init()
@@ -52,7 +55,23 @@ def gettingorder():
             number=listener.recognize_google(voice)
             print('your number is :{}'.format(number))
         return number
-    
+def tarans():
+    engin_talk('please slowly say the text that you want to be translate')
+    engin_talk("you can taype if works for you!!")
+    with sr.Microphone() as source:
+        if source!=0:
+            voice=listener.listen(source)
+            t_text=listener.recognize_google(voice)
+            t_text=t_text.lower()
+            print(t_text)
+        else:
+            t_text=input(str("please ensert your text as a string: "))
+            print('I got the text message!')
+
+        return t_text
+
+tarans()
+#generator,yeild,__next__,threat
     
 def gettingmsg():
     try:
@@ -92,11 +111,16 @@ def run_alexa():
             engin_talk("Message is sent")
         except:
             print("Error in sending message")
+    elif 'translate' in new_command:
+        engin_talk('please say the text that you want to taranslate')
+
+        
+    
     else:
         engin_talk('I could not hear properly! ')
     
 
-run_alexa()
+#run_alexa()
 #gettingorder()
 #gettingmsg()
 
