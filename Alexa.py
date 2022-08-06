@@ -56,21 +56,30 @@ def gettingorder():
             print('your number is :{}'.format(number))
         return number
 def tarans():
-    engin_talk('please slowly say the text that you want to be translate')
-    engin_talk("you can taype if works for you!!")
+    engin_talk('please choose you want to type or talk on the microphone for talking  please loudly say Yes')
     with sr.Microphone() as source:
-        if source!=0:
+        voice=listener.listen(source)
+        answer=listener.recognize_google(voice)
+        answer=answer.lower()
+        print(type(answer))
+        if answer=='yes':
+            engin_talk('please slowly talk on the microphone and say the statement that you want to translate ')
             voice=listener.listen(source)
             t_text=listener.recognize_google(voice)
             t_text=t_text.lower()
             print(t_text)
+            yield t_text
+            time.sleep(.4)
         else:
             t_text=input(str("please ensert your text as a string: "))
-            print('I got the text message!')
+            print('I go the text message!')
+            yield t_text
+            
+            
 
-        return t_text
+       
 
-tarans()
+#next(tarans())
 #generator,yeild,__next__,threat
     
 def gettingmsg():
@@ -112,7 +121,12 @@ def run_alexa():
         except:
             print("Error in sending message")
     elif 'translate' in new_command:
-        engin_talk('please say the text that you want to taranslate')
+        translator=translator()
+        my_text=next(tarans())
+        trans=translator.translate(my_text, src='en',des='es')
+        engin_talk(trans)
+        print(trans)
+
 
         
     
