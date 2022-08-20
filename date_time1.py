@@ -33,9 +33,7 @@ helloworld()
 printtext("niloo")
 print(narges(10,12))
 
-import os
-from stat import S_IREAD, S_IRGRP, S_IROTH
-os.chmod(r"C:\Users\nariv\Desktop\Project\date_time.py", S_IREAD|S_IRGRP|S_IROTH)
+
 
 
         
